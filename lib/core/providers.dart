@@ -5,7 +5,7 @@ import 'package:twitter_clone/constants/constants.dart';
 final appwriteClientProvider = Provider((ref) {
   Client client = Client();
   return client
-      .setEndPointRealtime(AppwriteConstants.endPoint)
+      .setEndpoint(AppwriteConstants.endPoint)
       .setProject(AppwriteConstants.projectId)
       // HACK only for development
       .setSelfSigned(status: true);
