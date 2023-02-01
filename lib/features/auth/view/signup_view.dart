@@ -2,22 +2,21 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:twitter_clone/common/common.dart';
 import 'package:twitter_clone/constants/constants.dart';
-import 'package:twitter_clone/features/auth/view/signup_view.dart';
+import 'package:twitter_clone/features/auth/view/login_view.dart';
 import 'package:twitter_clone/features/auth/widgets/auth_field.dart';
-import 'package:twitter_clone/theme/theme.dart';
+import 'package:twitter_clone/theme/pallete.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class SignupView extends StatefulWidget {
+  const SignupView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
-
+  State<SignupView> createState() => _SignupViewState();
   static route() => MaterialPageRoute(
-        builder: (context) => const LoginView(),
+        builder: (context) => const SignupView(),
       );
 }
 
-class _LoginViewState extends State<LoginView> {
+class _SignupViewState extends State<SignupView> {
   final appBar = WidgetConstants.appBar();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -62,10 +61,10 @@ class _LoginViewState extends State<LoginView> {
               const SizedBox(height: 40),
               RichText(
                 text: TextSpan(
-                  text: 'Don\'t have an account?',
+                  text: 'Already have an account?',
                   children: [
                     TextSpan(
-                      text: ' Sign up',
+                      text: ' Login',
                       style: const TextStyle(
                         color: Pallete.blueColor,
                         fontSize: 16,
@@ -74,7 +73,7 @@ class _LoginViewState extends State<LoginView> {
                         ..onTap = () {
                           Navigator.push(
                             context,
-                            SignupView.route(),
+                            LoginView.route(),
                           );
                         },
                     ),
