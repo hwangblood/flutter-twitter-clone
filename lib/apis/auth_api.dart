@@ -1,18 +1,24 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as models;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
 import 'package:twitter_clone/core/core.dart';
 
-abstract class _AuthApi {
+final authAPIProvider = Provider((ref) {
+  final account = ref.watch(appwriteAccountProvider);
+  return AuthAPI(account: account);
+});
+
+abstract class _AuthAPI {
   FutureEither<models.Account> signup({
     required String email,
     required String password,
   });
 }
 
-class AuthApi implements _AuthApi {
-  AuthApi({
+class AuthAPI implements _AuthAPI {
+  AuthAPI({
     required Account account,
   }) : _account = account;
 
