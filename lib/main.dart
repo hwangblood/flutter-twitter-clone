@@ -19,7 +19,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: AppTheme.theme,
-      home: const SignupView(),
+      home: const LoginView(),
     );
   }
 }

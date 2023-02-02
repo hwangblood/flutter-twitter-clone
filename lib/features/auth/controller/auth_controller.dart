@@ -9,11 +9,13 @@ final authControllerProvider =
 });
 
 class AuthController extends StateNotifier<bool> {
-  final AuthAPI _authAPI;
   AuthController({
     required AuthAPI authAPI,
   })  : _authAPI = authAPI,
         super(false);
+
+  final AuthAPI _authAPI;
+
   // state = isLoading
 
   void signup({
@@ -28,6 +30,21 @@ class AuthController extends StateNotifier<bool> {
     res.fold(
       (l) => showSnackBar(context, l.message),
       (r) => print(r.email),
+    );
+  }
+
+  void login({
+    required BuildContext context,
+    required String email,
+    required String password,
+  }) async {
+    state = true;
+    final res = await _authAPI.login(email: email, password: password);
+
+    state = false;
+    res.fold(
+      (l) => showSnackBar(context, l.message),
+      (r) => print(r.userId),
     );
   }
 }
