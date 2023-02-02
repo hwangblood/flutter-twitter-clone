@@ -61,7 +61,7 @@ class AuthController extends StateNotifier<bool> {
           (l) => showSnackBar(context, l.message),
           (r) {
             showSnackBar(context, 'Account created! Please login.');
-            Navigator.canPop(context);
+            Navigator.pop(context);
           },
         );
       },
