@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:twitter_clone/apis/auth_api.dart';
 import 'package:twitter_clone/core/core.dart';
+import 'package:twitter_clone/features/home/home.dart';
 
 final authControllerProvider =
     StateNotifierProvider<AuthController, bool>((ref) {
@@ -29,7 +30,10 @@ class AuthController extends StateNotifier<bool> {
     state = false;
     res.fold(
       (l) => showSnackBar(context, l.message),
-      (r) => print(r.email),
+      (r) {
+        showSnackBar(context, 'Account created! Please login.');
+        Navigator.canPop(context);
+      },
     );
   }
 
@@ -44,7 +48,9 @@ class AuthController extends StateNotifier<bool> {
     state = false;
     res.fold(
       (l) => showSnackBar(context, l.message),
-      (r) => print(r.userId),
+      (r) {
+        Navigator.pushReplacement(context, HomeView.route());
+      },
     );
   }
 }

@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:twitter_clone/common/common.dart';
 import 'package:twitter_clone/constants/constants.dart';
-import 'package:twitter_clone/features/auth/controller/auth_controller.dart';
-import 'package:twitter_clone/features/auth/view/signup_view.dart';
-import 'package:twitter_clone/features/auth/widgets/auth_field.dart';
+import 'package:twitter_clone/features/auth/auth.dart';
 import 'package:twitter_clone/theme/theme.dart';
 
 class LoginView extends ConsumerStatefulWidget {
