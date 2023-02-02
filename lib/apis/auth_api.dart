@@ -20,6 +20,8 @@ abstract class _AuthAPI {
     required String email,
     required String password,
   });
+
+  Future<models.Account?> currentUserAccount();
 }
 
 class AuthAPI implements _AuthAPI {
@@ -30,8 +32,21 @@ class AuthAPI implements _AuthAPI {
   final Account _account;
 
   @override
-  FutureEither<models.Session> login(
-      {required String email, required String password}) async {
+  Future<models.Account?> currentUserAccount() async {
+    try {
+      return await _account.get();
+    } on AppwriteException {
+      return null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  @override
+  FutureEither<models.Session> login({
+    required String email,
+    required String password,
+  }) async {
     try {
       final session = await _account.createEmailSession(
         email: email,
@@ -50,8 +65,10 @@ class AuthAPI implements _AuthAPI {
   }
 
   @override
-  FutureEither<models.Account> signup(
-      {required String email, required String password}) async {
+  FutureEither<models.Account> signup({
+    required String email,
+    required String password,
+  }) async {
     try {
       final account = await _account.create(
         userId: ID.unique(),
