@@ -1,8 +1,12 @@
+import 'dart:io';
+
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:twitter_clone/common/common.dart';
 import 'package:twitter_clone/constants/constants.dart';
+import 'package:twitter_clone/core/utils.dart';
 import 'package:twitter_clone/features/auth/auth.dart';
 import 'package:twitter_clone/theme/theme.dart';
 
@@ -20,6 +24,12 @@ class CreateTweetView extends ConsumerStatefulWidget {
 
 class _CreateTweetViewState extends ConsumerState<CreateTweetView> {
   final tweetTextController = TextEditingController();
+  List<File> images = [];
+
+  Future<void> onPickImages() async {
+    images = await pickImages();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,14 +54,13 @@ class _CreateTweetViewState extends ConsumerState<CreateTweetView> {
           ? const Loader()
           : SafeArea(
               child: SingleChildScrollView(
-                // controller: controller,
                 child: Column(
                   children: [
                     Row(
                       children: [
                         CircleAvatar(
                           backgroundImage: NetworkImage(currentUser.profilePic),
-                          radius: 30,
+                          radius: 25,
                         ),
                         const SizedBox(width: 15),
                         Expanded(
@@ -72,6 +81,20 @@ class _CreateTweetViewState extends ConsumerState<CreateTweetView> {
                         ),
                       ],
                     ),
+                    if (images.isNotEmpty)
+                      CarouselSlider(
+                        items: images.map((file) {
+                          return Container(
+                            width: MediaQuery.of(context).size.width,
+                            margin: const EdgeInsets.symmetric(horizontal: 5),
+                            child: Image.file(file),
+                          );
+                        }).toList(),
+                        options: CarouselOptions(
+                          height: 400,
+                          enableInfiniteScroll: false,
+                        ),
+                      ),
                   ],
                 ),
               ),
@@ -91,7 +114,9 @@ class _CreateTweetViewState extends ConsumerState<CreateTweetView> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: SvgPicture.asset(AssetsConstants.galleryIcon),
+                child: GestureDetector(
+                    onTap: onPickImages,
+                    child: SvgPicture.asset(AssetsConstants.galleryIcon)),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
