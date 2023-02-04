@@ -15,18 +15,18 @@ final authControllerProvider =
   );
 });
 
-final currentUserDetailsProvider = FutureProvider<UserModel?>((ref) async {
+final currentUserDetailsProvider = FutureProvider((ref) {
   final currentUserId = ref.watch(currentUserAccountProvider).value!.$id;
   final userDetails = ref.watch(userDetailsProvider(currentUserId));
   return userDetails.value;
 });
 
-final userDetailsProvider = FutureProvider.family((ref, String uid) async {
+final userDetailsProvider = FutureProvider.family((ref, String uid) {
   final authController = ref.watch(authControllerProvider.notifier);
   return authController.getUserData(uid);
 });
 
-final currentUserAccountProvider = FutureProvider<models.Account?>((ref) async {
+final currentUserAccountProvider = FutureProvider((ref) {
   final authController = ref.watch(authControllerProvider.notifier);
   return authController.currentUser();
 });
@@ -45,48 +45,49 @@ class AuthController extends StateNotifier<bool> {
   Future<models.Account?> currentUser() => _authAPI.currentUserAccount();
 
   void signup({
-    required BuildContext context,
     required String email,
     required String password,
+    required BuildContext context,
   }) async {
     state = true;
-    final res = await _authAPI.signup(email: email, password: password);
-
+    final res = await _authAPI.signup(
+      email: email,
+      password: password,
+    );
     state = false;
     res.fold(
       (l) => showSnackBar(context, l.message),
       (r) async {
-        final userModel = UserModel(
+        UserModel userModel = UserModel(
           email: email,
           name: getNameFromEmail(email),
           followers: const [],
           following: const [],
           profilePic: '',
           bannerPic: '',
-          uid: '',
+          uid: r.$id,
           bio: '',
           isTwitterBlue: false,
         );
         final res2 = await _userAPI.saveUserData(userModel);
-        res2.fold(
-          (l) => showSnackBar(context, l.message),
-          (r) {
-            showSnackBar(context, 'Account created! Please login.');
-            Navigator.pop(context);
-          },
-        );
+        res2.fold((l) => showSnackBar(context, l.message), (r) {
+          showSnackBar(context, 'Accounted created! Please login.');
+          Navigator.pop(context);
+        });
       },
     );
   }
 
   void login({
-    required BuildContext context,
     required String email,
     required String password,
+    required BuildContext context,
   }) async {
     state = true;
-    final res = await _authAPI.login(email: email, password: password);
-
+    final res = await _authAPI.login(
+      email: email,
+      password: password,
+    );
     state = false;
     res.fold(
       (l) => showSnackBar(context, l.message),
@@ -98,7 +99,7 @@ class AuthController extends StateNotifier<bool> {
 
   Future<UserModel> getUserData(String uid) async {
     final document = await _userAPI.getUserData(uid);
-    final userModel = UserModel.fromMap(document.data);
-    return userModel;
+    final updatedUser = UserModel.fromMap(document.data);
+    return updatedUser;
   }
 }
