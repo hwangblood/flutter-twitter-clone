@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:twitter_clone/constants/constants.dart';
+import 'package:twitter_clone/features/tweet/view/create_tweet_view.dart';
 import 'package:twitter_clone/theme/theme.dart';
 
 class HomeView extends StatefulWidget {
@@ -18,6 +19,10 @@ class _HomeViewState extends State<HomeView> {
   final appBar = WidgetConstants.appBar();
 
   int _page = 0;
+
+  onCreateTweet() {
+    Navigator.push(context, CreateTweetView.route());
+  }
 
   void _onPageChange(int value) {
     setState(() {
@@ -38,7 +43,7 @@ class _HomeViewState extends State<HomeView> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: onCreateTweet,
         child: const Icon(
           Icons.add,
           color: Pallete.whiteColor,
