@@ -7,7 +7,7 @@ final appwriteClientProvider = Provider((ref) {
   return client
       .setEndpoint(AppwriteConstants.endPoint)
       .setProject(AppwriteConstants.projectId)
-      // HACK only for development
+      // HACK only setSelfSigned for development
       .setSelfSigned(status: true);
 });
 
