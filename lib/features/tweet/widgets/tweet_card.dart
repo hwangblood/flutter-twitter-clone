@@ -7,6 +7,7 @@ import 'package:twitter_clone/constants/assets_constants.dart';
 import 'package:twitter_clone/core/core.dart';
 import 'package:twitter_clone/features/auth/auth.dart';
 import 'package:twitter_clone/features/tweet/tweet.dart';
+import 'package:twitter_clone/features/tweet/widgets/carousel_image_preview.dart';
 import 'package:twitter_clone/features/tweet/widgets/tweet_icon_button.dart';
 import 'package:twitter_clone/models/models.dart';
 import 'package:twitter_clone/theme/theme.dart';
@@ -66,8 +67,7 @@ class TweetCard extends ConsumerWidget {
                           HashtagText(text: tweet.text),
 
                           if (tweet.tweetType == TweetType.image)
-                            // FIXME Show image with Appwrite sdk method
-                            CarouselImage(imageLinks: tweet.imageLinks),
+                            CarouselImagePreview(imageIds: tweet.imageIds),
 
                           if (tweet.link.isNotEmpty) ...[
                             const SizedBox(height: 4),

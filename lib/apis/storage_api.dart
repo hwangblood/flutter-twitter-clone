@@ -16,7 +16,7 @@ class StorageAPI {
 
   StorageAPI({required Storage storage}) : _storage = storage;
 
-  Future<List<String>> uploadImages(List<File> files) async {
+  Future<List<String>> uploadImagesToUrl(List<File> files) async {
     List<String> imageLinks = [];
     for (final file in files) {
       final uploadedImage = await _storage.createFile(
@@ -27,5 +27,18 @@ class StorageAPI {
       imageLinks.add(AppwriteConstants.imageUrl(uploadedImage.$id));
     }
     return imageLinks;
+  }
+
+  Future<List<String>> uploadImagesToId(List<File> files) async {
+    List<String> imageIds = [];
+    for (final file in files) {
+      final uploadedImage = await _storage.createFile(
+        bucketId: AppwriteConstants.imagesBucket,
+        fileId: ID.unique(),
+        file: InputFile(path: file.path),
+      );
+      imageIds.add(uploadedImage.$id);
+    }
+    return imageIds;
   }
 }

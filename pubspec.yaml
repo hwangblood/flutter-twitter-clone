@@ -17,6 +17,7 @@ dependencies:
   fpdart: ^0.4.0
   image_picker: ^0.8.6+1
   like_button: ^2.0.5
+  shimmer: ^2.0.0
   timeago: ^3.3.0
 
 dev_dependencies:

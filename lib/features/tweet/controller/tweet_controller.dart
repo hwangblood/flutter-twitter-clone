@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:twitter_clone/apis/storage_api.dart';
 import 'package:twitter_clone/apis/tweet_api.dart';
+import 'package:twitter_clone/constants/appwrite_constants.dart';
 import 'package:twitter_clone/core/core.dart';
 import 'package:twitter_clone/features/auth/controller/auth_controller.dart';
 import 'package:twitter_clone/models/models.dart';
@@ -20,6 +21,15 @@ final tweetControllerProvider =
 final getTweetsProvider = FutureProvider((ref) {
   final tweetController = ref.watch(tweetControllerProvider.notifier);
   return tweetController.getTweets();
+});
+
+final tweetImagesPreviewProvider =
+    FutureProvider.family((ref, String imageId) async {
+  final storageProvider = ref.watch(appwriteStorageProvider);
+  return storageProvider.getFilePreview(
+    bucketId: AppwriteConstants.imagesBucket,
+    fileId: imageId,
+  );
 });
 
 class TweetController extends StateNotifier<bool> {
@@ -67,12 +77,13 @@ class TweetController extends StateNotifier<bool> {
     final link = _getLinkFromText(text);
     final user = _ref.read(currentUserDetailsProvider).value!;
 
-    final imageLinks = await _storageAPI.uploadImages(images);
+    final imageIds = await _storageAPI.uploadImagesToId(images);
     TweetModel tweet = TweetModel(
       text: text,
       hashtags: hashtags,
       link: link,
-      imageLinks: imageLinks,
+      imageLinks: const [],
+      imageIds: imageIds,
       uid: user.uid,
       tweetType: TweetType.image,
       tweetedAt: DateTime.now(),
@@ -101,6 +112,7 @@ class TweetController extends StateNotifier<bool> {
       hashtags: hashtags,
       link: link,
       imageLinks: const [],
+      imageIds: const [],
       uid: user.uid,
       tweetType: TweetType.text,
       tweetedAt: DateTime.now(),

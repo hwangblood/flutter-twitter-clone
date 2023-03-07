@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/foundation.dart';
 
 import 'package:twitter_clone/core/enums/tweet_type_enum.dart';
@@ -8,6 +9,7 @@ class TweetModel {
   final List<String> hashtags;
   final String link;
   final List<String> imageLinks;
+  final List<String> imageIds;
   final String uid;
   final TweetType tweetType;
   final DateTime tweetedAt;
@@ -21,6 +23,7 @@ class TweetModel {
     required this.hashtags,
     required this.link,
     required this.imageLinks,
+    required this.imageIds,
     required this.uid,
     required this.tweetType,
     required this.tweetedAt,
@@ -35,6 +38,7 @@ class TweetModel {
     List<String>? hashtags,
     String? link,
     List<String>? imageLinks,
+    List<String>? imageIds,
     String? uid,
     TweetType? tweetType,
     DateTime? tweetedAt,
@@ -50,6 +54,7 @@ class TweetModel {
       hashtags: hashtags ?? this.hashtags,
       link: link ?? this.link,
       imageLinks: imageLinks ?? this.imageLinks,
+      imageIds: imageIds ?? this.imageIds,
       uid: uid ?? this.uid,
       tweetType: tweetType ?? this.tweetType,
       tweetedAt: tweetedAt ?? this.tweetedAt,
@@ -66,6 +71,7 @@ class TweetModel {
       'hashtags': hashtags,
       'link': link,
       'imageLinks': imageLinks,
+      'imageIds': imageIds,
       'uid': uid,
       'tweetType': tweetType.type,
       'tweetedAt': tweetedAt.millisecondsSinceEpoch,
@@ -81,6 +87,7 @@ class TweetModel {
       hashtags: List<String>.from(map['hashtags']),
       link: map['link'] ?? '',
       imageLinks: List<String>.from(map['imageLinks']),
+      imageIds: List<String>.from(map['imageIds']),
       uid: map['uid'] ?? '',
       tweetType: (map['tweetType'] as String).toTweetType(),
       tweetedAt: DateTime.fromMillisecondsSinceEpoch(map['tweetedAt']),
@@ -92,11 +99,6 @@ class TweetModel {
   }
 
   @override
-  String toString() {
-    return 'Tweet(text: $text, hashtags: $hashtags, link: $link, imageLinks: $imageLinks, uid: $uid, tweetType: $tweetType, tweetedAt: $tweetedAt, likes: $likes, commentIds: $commentIds, id: $id, reshareCount: $reshareCount)';
-  }
-
-  @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
@@ -105,6 +107,7 @@ class TweetModel {
         listEquals(other.hashtags, hashtags) &&
         other.link == link &&
         listEquals(other.imageLinks, imageLinks) &&
+        listEquals(other.imageIds, imageIds) &&
         other.uid == uid &&
         other.tweetType == tweetType &&
         other.tweetedAt == tweetedAt &&
@@ -120,6 +123,7 @@ class TweetModel {
         hashtags.hashCode ^
         link.hashCode ^
         imageLinks.hashCode ^
+        imageIds.hashCode ^
         uid.hashCode ^
         tweetType.hashCode ^
         tweetedAt.hashCode ^
@@ -127,5 +131,10 @@ class TweetModel {
         commentIds.hashCode ^
         id.hashCode ^
         reshareCount.hashCode;
+  }
+
+  @override
+  String toString() {
+    return 'TweetModel(text: $text, hashtags: $hashtags, link: $link, imageLinks: $imageLinks, imageIds: $imageIds, uid: $uid, tweetType: $tweetType, tweetedAt: $tweetedAt, likes: $likes, commentIds: $commentIds, id: $id, reshareCount: $reshareCount)';
   }
 }
