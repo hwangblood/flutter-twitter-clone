@@ -25,13 +25,19 @@ final getTweetsProvider = FutureProvider((ref) {
   return tweetController.getTweets();
 });
 
-final tweetImagesPreviewProvider =
+final tweetImagePreviewProvider =
     FutureProvider.family((ref, String imageId) async {
   final storageProvider = ref.watch(appwriteStorageProvider);
   return storageProvider.getFilePreview(
     bucketId: AppwriteConstants.imagesBucket,
     fileId: imageId,
+    quality: 25,
   );
+});
+
+final getLatestTweetProvider = StreamProvider((ref) {
+  final tweetAPI = ref.watch(tweetAPIProvider);
+  return tweetAPI.getLatestTweet();
 });
 
 class TweetController extends StateNotifier<bool> {
@@ -96,7 +102,10 @@ class TweetController extends StateNotifier<bool> {
     );
 
     final res = await _tweetAPI.shareTweet(tweet);
-    res.fold((l) => showSnackBar(context, l.message), (r) => null);
+    res.fold(
+      (l) => showSnackBar(context, l.message),
+      (r) => null,
+    );
     state = false;
   }
 

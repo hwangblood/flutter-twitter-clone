@@ -32,7 +32,10 @@ class _CreateTweetViewState extends ConsumerState<CreateTweetView> {
   void shareTweet() {
     final tweetController = ref.read(tweetControllerProvider.notifier);
     tweetController.shareTweet(
-        context: context, text: tweetTextController.text, images: images);
+      context: context,
+      text: tweetTextController.text,
+      images: images,
+    );
   }
 
   Future<void> onPickImages() async {
