@@ -1,5 +1,6 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+
+import 'package:carousel_slider/carousel_slider.dart';
 
 class CarouselImage extends StatefulWidget {
   final List<String> imageLinks;
@@ -24,9 +25,9 @@ class _CarouselImageState extends State<CarouselImage> {
                   width: MediaQuery.of(context).size.width,
                   margin: const EdgeInsets.all(8),
                   child: Image.network(
-                    // link,
+                    link,
                     // TODO replace with real image link
-                    'https://tse3-mm.cn.bing.net/th/id/OIP-C.73IgUxPfyXUKZAaIXgutrwHaDt?pid=ImgDet&rs=1',
+                    // 'https://tse3-mm.cn.bing.net/th/id/OIP-C.73IgUxPfyXUKZAaIXgutrwHaDt?pid=ImgDet&rs=1',
                     fit: BoxFit.contain,
                   ),
                 );

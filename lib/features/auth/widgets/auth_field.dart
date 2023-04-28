@@ -1,7 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import 'package:twitter_clone/theme/theme.dart';
+
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 
 class AuthField extends StatelessWidget {
   final TextEditingController controller;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:twitter_clone/theme/pallete.dart';
 
 class AppTheme {

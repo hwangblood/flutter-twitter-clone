@@ -1,7 +1,9 @@
-import 'package:any_link_preview/any_link_preview.dart';
 import 'package:flutter/material.dart';
+
+import 'package:any_link_preview/any_link_preview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timeago/timeago.dart' as timeago;
+
 import 'package:twitter_clone/common/common.dart';
 import 'package:twitter_clone/constants/assets_constants.dart';
 import 'package:twitter_clone/core/core.dart';
@@ -67,6 +69,7 @@ class TweetCard extends ConsumerWidget {
                           HashtagText(text: tweet.text),
 
                           if (tweet.tweetType == TweetType.image)
+                            // CarouselImage(imageLinks: tweet.imageLinks),
                             CarouselImagePreview(imageIds: tweet.imageIds),
 
                           if (tweet.link.isNotEmpty) ...[
