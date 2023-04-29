@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:twitter_clone/common/common.dart';
+import 'package:twitter_clone/common/extensions/extensions.dart';
 import 'package:twitter_clone/constants/constants.dart';
 import 'package:twitter_clone/features/auth/auth.dart';
 import 'package:twitter_clone/theme/pallete.dart';
@@ -21,8 +22,12 @@ class SignupView extends ConsumerStatefulWidget {
 
 class _SignupViewState extends ConsumerState<SignupView> {
   final appBar = WidgetConstants.appBar();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final emailController = TextEditingController(
+    text: 'hwangblood@gmail.com'.ifDebugging,
+  );
+  final passwordController = TextEditingController(
+    text: 'asdfghjkl'.ifDebugging,
+  );
 
   @override
   void dispose() {

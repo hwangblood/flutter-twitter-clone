@@ -2,6 +2,8 @@
 
 Full Stack Twitter App building with [Appwrite](https://appwrite.io/) - Works on Android & iOS!
 
+Appwrite 1.3.3
+
 ## Architectural
 
 UI - Controller - Repository

@@ -44,7 +44,7 @@ class AuthController extends StateNotifier<bool> {
   final AuthAPI _authAPI;
   final UserAPI _userAPI;
 
-  Future<models.Account?> currentUser() => _authAPI.currentUserAccount();
+  Future<models.User?> currentUser() => _authAPI.currentUserAccount();
 
   void signup({
     required String email,
@@ -58,7 +58,10 @@ class AuthController extends StateNotifier<bool> {
     );
     state = false;
     res.fold(
-      (l) => showSnackBar(context, l.message),
+      (l) {
+        print('singup ${l.message}');
+        showSnackBar(context, l.message);
+      },
       (r) async {
         UserModel userModel = UserModel(
           email: email,
@@ -72,10 +75,15 @@ class AuthController extends StateNotifier<bool> {
           isTwitterBlue: false,
         );
         final res2 = await _userAPI.saveUserData(userModel);
-        res2.fold((l) => showSnackBar(context, l.message), (r) {
-          showSnackBar(context, 'Accounted created! Please login.');
-          Navigator.pop(context);
-        });
+        res2.fold(
+          (l) {
+            showSnackBar(context, l.message);
+          },
+          (r) {
+            showSnackBar(context, 'Accounted created! Please login.');
+            Navigator.pop(context);
+          },
+        );
       },
     );
   }

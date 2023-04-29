@@ -23,7 +23,7 @@ class StorageAPI {
       final uploadedImage = await _storage.createFile(
         bucketId: AppwriteConstants.imagesBucket,
         fileId: ID.unique(),
-        file: InputFile(path: file.path),
+        file: InputFile.fromPath(path: file.path),
       );
       imageLinks.add(AppwriteConstants.imageUrl(uploadedImage.$id));
     }
@@ -36,7 +36,7 @@ class StorageAPI {
       final uploadedImage = await _storage.createFile(
         bucketId: AppwriteConstants.imagesBucket,
         fileId: ID.unique(),
-        file: InputFile(path: file.path),
+        file: InputFile.fromPath(path: file.path),
       );
       imageIds.add(uploadedImage.$id);
     }
