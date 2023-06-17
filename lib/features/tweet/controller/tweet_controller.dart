@@ -58,6 +58,21 @@ class TweetController extends StateNotifier<bool> {
     return tweetList.map((tweet) => TweetModel.fromMap(tweet.data)).toList();
   }
 
+  Future<void> likeTweet(TweetModel tweetModel, UserModel userModel) async {
+    List<String> likes = tweetModel.likes;
+
+    if (likes.contains(userModel.uid)) {
+      likes.remove(userModel.uid);
+    } else {
+      likes.add(userModel.uid);
+    }
+    tweetModel = tweetModel.copyWith(likes: likes);
+    final res = await _tweetAPI.likeTweet(tweetModel);
+
+    // TODO: show snackbar when have a failure
+    res.fold((l) => print(l), (r) => null);
+  }
+
   void shareTweet({
     required BuildContext context,
     required String text,

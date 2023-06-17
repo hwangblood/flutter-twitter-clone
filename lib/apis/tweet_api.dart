@@ -20,6 +20,8 @@ abstract class _TweetAPI {
   Future<List<models.Document>> getTweets();
 
   Stream<RealtimeMessage> getLatestTweet();
+
+  FutureEither<models.Document> likeTweet(TweetModel tweetModel);
 }
 
 class TweetAPI implements _TweetAPI {
@@ -72,5 +74,28 @@ class TweetAPI implements _TweetAPI {
       'databases.${AppwriteConstants.databaseId}.collections'
           '.${AppwriteConstants.tweetsCollection}.documents',
     ]).stream;
+  }
+
+  @override
+  FutureEither<models.Document> likeTweet(TweetModel tweetModel) async {
+    try {
+      final document = await _db.updateDocument(
+        databaseId: AppwriteConstants.databaseId,
+        collectionId: AppwriteConstants.tweetsCollection,
+        documentId: tweetModel.id,
+        data: {
+          'likes': tweetModel.likes,
+        },
+      );
+      return right(document);
+    } on AppwriteException catch (e, stackTrace) {
+      return left(
+        Failure(e.message ?? 'Something unexpected error occured.', stackTrace),
+      );
+    } catch (e, stackTrace) {
+      return left(
+        Failure(e.toString(), stackTrace),
+      );
+    }
   }
 }
