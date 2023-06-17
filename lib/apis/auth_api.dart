@@ -1,5 +1,6 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as models;
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -81,7 +82,10 @@ class AuthAPI implements _AuthAPI {
         Failure(e.message ?? 'Something unexpected error occured.', stackTrace),
       );
     } catch (e, stackTrace) {
-      print('error $e');
+      if (kDebugMode) {
+        print('error $e');
+      }
+
       return left(
         Failure(e.toString(), stackTrace),
       );

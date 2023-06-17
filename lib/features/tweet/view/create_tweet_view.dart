@@ -20,7 +20,7 @@ class CreateTweetView extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() =>
       _CreateTweetViewState();
 
-  static route() => MaterialPageRoute(
+  static MaterialPageRoute route() => MaterialPageRoute(
         builder: (context) => const CreateTweetView(),
       );
 }
@@ -118,7 +118,7 @@ class _CreateTweetViewState extends ConsumerState<CreateTweetView> {
               top: BorderSide(
             color: Pallete.greyColor,
             width: 0.3,
-          )),
+          ),),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -128,7 +128,7 @@ class _CreateTweetViewState extends ConsumerState<CreateTweetView> {
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
                     onTap: onPickImages,
-                    child: SvgPicture.asset(AssetsConstants.galleryIcon)),
+                    child: SvgPicture.asset(AssetsConstants.galleryIcon),),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

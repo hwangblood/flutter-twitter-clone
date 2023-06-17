@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:appwrite/models.dart' as models;
@@ -59,7 +60,9 @@ class AuthController extends StateNotifier<bool> {
     state = false;
     res.fold(
       (l) {
-        print('singup ${l.message}');
+        if (kDebugMode) {
+          print('singup ${l.message}');
+        }
         showSnackBar(context, l.message);
       },
       (r) async {

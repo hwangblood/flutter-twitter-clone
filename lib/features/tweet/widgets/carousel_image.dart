@@ -33,14 +33,15 @@ class _CarouselImageState extends State<CarouselImage> {
                 );
               }).toList(),
               options: CarouselOptions(
-                  // height: 400,
-                  viewportFraction: 1,
-                  enableInfiniteScroll: false,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      _current = index;
-                    });
-                  }),
+                // height: 400,
+                viewportFraction: 1,
+                enableInfiniteScroll: false,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    _current = index;
+                  });
+                },
+              ),
             ),
             if (widget.imageLinks.length > 1)
               Row(

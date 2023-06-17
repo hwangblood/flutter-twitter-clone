@@ -1,5 +1,5 @@
 class AppwriteConstants {
-  static const String endPoint = 'http://70ab7a0f.r2.vip.cpolar.cn/v1';
+  static const String endPoint = 'http://71b57f4b.r1.vip.cpolar.cn/v1';
   static const String projectId = '644c9bb0d306bd112f20';
   static const String databaseId = '644c9d0e0118b410f109';
 

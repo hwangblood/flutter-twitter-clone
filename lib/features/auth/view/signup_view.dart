@@ -15,7 +15,7 @@ class SignupView extends ConsumerStatefulWidget {
   @override
   ConsumerState<SignupView> createState() => _SignupViewState();
 
-  static route() => MaterialPageRoute(
+  static MaterialPageRoute route() => MaterialPageRoute(
         builder: (context) => const SignupView(),
       );
 }

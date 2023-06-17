@@ -15,7 +15,7 @@ class LoginView extends ConsumerStatefulWidget {
   @override
   ConsumerState<LoginView> createState() => _LoginViewState();
 
-  static route() => MaterialPageRoute(
+  static MaterialPageRoute route() => MaterialPageRoute(
         builder: (context) => const LoginView(),
       );
 }

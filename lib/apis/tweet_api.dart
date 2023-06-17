@@ -59,7 +59,7 @@ class TweetAPI implements _TweetAPI {
       databaseId: AppwriteConstants.databaseId,
       collectionId: AppwriteConstants.tweetsCollection,
       queries: [
-        Query.orderDesc("tweetedAt"),
+        Query.orderDesc('tweetedAt'),
       ],
     );
 

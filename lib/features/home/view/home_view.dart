@@ -13,7 +13,7 @@ class HomeView extends StatefulWidget {
   @override
   State<HomeView> createState() => _HomeViewState();
 
-  static route() => MaterialPageRoute(
+  static MaterialPageRoute route() => MaterialPageRoute(
         builder: (context) => const HomeView(),
       );
 }
@@ -23,7 +23,7 @@ class _HomeViewState extends State<HomeView> {
 
   int _page = 0;
 
-  onCreateTweet() {
+  void onCreateTweet(BuildContext context) {
     Navigator.push(context, CreateTweetView.route());
   }
 
@@ -46,7 +46,7 @@ class _HomeViewState extends State<HomeView> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: onCreateTweet,
+        onPressed: () => onCreateTweet(context),
         child: const Icon(
           Icons.add,
           color: Pallete.whiteColor,
@@ -61,13 +61,14 @@ class _HomeViewState extends State<HomeView> {
         backgroundColor: Pallete.backgroundColor,
         items: [
           BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                _page == 0
-                    ? AssetsConstants.homeFilledIcon
-                    : AssetsConstants.homeOutlinedIcon,
-                color: Pallete.whiteColor,
-              ),
-              label: 'Home'),
+            icon: SvgPicture.asset(
+              _page == 0
+                  ? AssetsConstants.homeFilledIcon
+                  : AssetsConstants.homeOutlinedIcon,
+              color: Pallete.whiteColor,
+            ),
+            label: 'Home',
+          ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
               AssetsConstants.searchIcon,

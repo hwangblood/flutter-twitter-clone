@@ -55,7 +55,7 @@ class _CarouselImagePreviewState extends State<CarouselImagePreview> {
                     setState(() {
                       _current = index;
                     });
-                  }),
+                  },),
             ),
             if (widget.imageIds.length > 1)
               Row(
