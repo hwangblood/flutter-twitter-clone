@@ -31,7 +31,7 @@ class _CarouselImagePreviewState extends State<CarouselImagePreview> {
                   margin: const EdgeInsets.all(8),
                   child: Consumer(
                     builder: (context, ref, child) {
-                      return ref.read(tweetImagePreviewProvider(imageId)).when(
+                      return ref.watch(tweetImagePreviewProvider(imageId)).when(
                             data: (data) => Image.memory(
                               data,
                               fit: BoxFit.cover,
