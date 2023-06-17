@@ -48,14 +48,15 @@ class _CarouselImagePreviewState extends State<CarouselImagePreview> {
                 );
               }).toList(),
               options: CarouselOptions(
-                  // height: 400,
-                  viewportFraction: 1,
-                  enableInfiniteScroll: false,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      _current = index;
-                    });
-                  },),
+                // height: 400,
+                viewportFraction: 1,
+                enableInfiniteScroll: false,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    _current = index;
+                  });
+                },
+              ),
             ),
             if (widget.imageIds.length > 1)
               Row(

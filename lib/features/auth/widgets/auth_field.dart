@@ -2,22 +2,26 @@ import 'package:flutter/material.dart';
 
 import 'package:twitter_clone/theme/theme.dart';
 
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 class AuthField extends StatelessWidget {
   final TextEditingController controller;
 
   final String hintText;
+
+  // ignore: prefer_typing_uninitialized_variables
+  final obscureText;
+
   const AuthField({
     Key? key,
     required this.controller,
     required this.hintText,
+    this.obscureText = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      obscureText: obscureText,
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
