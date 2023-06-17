@@ -19,6 +19,8 @@ class TweetModel {
   final String id;
   final int reshareCount;
 
+  final String retweetedBy;
+
   const TweetModel({
     required this.text,
     required this.hashtags,
@@ -32,6 +34,7 @@ class TweetModel {
     required this.commentIds,
     required this.id,
     required this.reshareCount,
+    required this.retweetedBy,
   });
 
   TweetModel copyWith({
@@ -48,7 +51,6 @@ class TweetModel {
     String? id,
     int? reshareCount,
     String? retweetedBy,
-    String? repliedTo,
   }) {
     return TweetModel(
       text: text ?? this.text,
@@ -63,6 +65,7 @@ class TweetModel {
       commentIds: commentIds ?? this.commentIds,
       id: id ?? this.id,
       reshareCount: reshareCount ?? this.reshareCount,
+      retweetedBy: retweetedBy ?? this.retweetedBy,
     );
   }
 
@@ -79,6 +82,7 @@ class TweetModel {
       'likes': likes,
       'commentIds': commentIds,
       'reshareCount': reshareCount,
+      'retweetedBy': retweetedBy,
     };
   }
 
@@ -94,8 +98,10 @@ class TweetModel {
       tweetedAt: DateTime.fromMillisecondsSinceEpoch(map['tweetedAt']),
       likes: List<String>.from(map['likes']),
       commentIds: List<String>.from(map['commentIds']),
+      // * NOTE: the id field name from json response is '$id'
       id: map['\$id'] ?? '',
       reshareCount: map['reshareCount']?.toInt() ?? 0,
+      retweetedBy: map['retweetedBy'] ?? '',
     );
   }
 
@@ -115,7 +121,8 @@ class TweetModel {
         listEquals(other.likes, likes) &&
         listEquals(other.commentIds, commentIds) &&
         other.id == id &&
-        other.reshareCount == reshareCount;
+        other.reshareCount == reshareCount &&
+        other.retweetedBy == retweetedBy;
   }
 
   @override
@@ -131,11 +138,12 @@ class TweetModel {
         likes.hashCode ^
         commentIds.hashCode ^
         id.hashCode ^
-        reshareCount.hashCode;
+        reshareCount.hashCode ^
+        retweetedBy.hashCode;
   }
 
   @override
   String toString() {
-    return 'TweetModel(text: $text, hashtags: $hashtags, link: $link, imageLinks: $imageLinks, imageIds: $imageIds, uid: $uid, tweetType: $tweetType, tweetedAt: $tweetedAt, likes: $likes, commentIds: $commentIds, id: $id, reshareCount: $reshareCount)';
+    return 'TweetModel(text: $text)';
   }
 }

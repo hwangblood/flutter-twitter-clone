@@ -22,6 +22,7 @@ class UserModel {
       following: List<String>.from(map['following']),
       profilePic: map['profilePic'] as String,
       bannerPic: map['bannerPic'] as String,
+      // * NOTE: the id field name from json response is '$id'
       uid: map['\$id'] as String,
       bio: map['bio'] as String,
       isTwitterBlue: map['isTwitterBlue'] as bool,

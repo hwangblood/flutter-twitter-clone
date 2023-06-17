@@ -10,6 +10,8 @@ class AppwriteConstants {
 
   static const tweetCreateEvent = 'databases.*.collections'
       '.${AppwriteConstants.tweetsCollection}.documents.*.create';
+  static const tweetUpdateEvent = 'databases.*.collections'
+      '.${AppwriteConstants.tweetsCollection}.documents.*.update';
 
   // http://localhost/v1/storage/buckets/63e0f940a5278221121e/files/63e0fb272d21215acf11/view?project=63d964ad74bde4f422c9&mode=admin
 
